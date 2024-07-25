@@ -48,26 +48,40 @@ $ npm run start:prod
 ## Test
 
 ```bash
-# unit tests
-$ npm run test
-
 # e2e tests
 $ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
 ```
 
-## Support
+## Documentation
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+  #### 1. Created Cron for scraping the show data
 
-## Stay in touch
+  This cron will run every 20 second and scrap 10 shows data and save shows & cast information in mongoDB. This cron will save upto 1000 shows we can increase the limit.
+  File location:  `src/shows/shows.service.ts`
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+  ### 2. Get shows List API
 
-## License
+  Create the get shows list api with pagination & will return 
+  `
+   shows,
+   totalShows,
+   totalPages,
+   currentPage: page,
+  `
 
-Nest is [MIT licensed](LICENSE).
+  `curl --location 'http://localhost:3000/shows?page=2'`
+
+  File location: `src/shows/shows.controller.ts`
+
+  ### 3. Test case
+
+  Create get show list test case 
+  - shows, totalShows, totalPages & currentPage should be defined
+  - Api status expected tobe 200
+
+  File location: `test/shows.e2e-spec.ts`
+
+  ### 4. CI pipeline
+
+  Added CI pieline also
+  https://github.com/anand-parmar/tvmaze/actions
