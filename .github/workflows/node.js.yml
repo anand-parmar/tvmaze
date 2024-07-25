@@ -10,7 +10,7 @@ on:
     branches: ['main']
 
 jobs:
-  build:
+  build_test:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -28,18 +28,12 @@ jobs:
           cat .env
       - run: npm install
       - run: npm run build
+      - run: npm run test:e2e
 
-      - uses: actions/upload-artifact@master
-        with:
-          name: my-artifact
-          path: /artifact
-
-  test:
+  deploy:
+    needs: [build_test]
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/download-artifact@master
-        with:
-          name: my-artifact
-          path: /artifact
-
-      - run: npm run test:e2e
+      - name: 'Deployment process '
+        run: |
+          echo "Deploying the application"
