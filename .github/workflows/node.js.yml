@@ -28,4 +28,18 @@ jobs:
           cat .env
       - run: npm install
       - run: npm run build
+
+      - uses: actions/upload-artifact@master
+        with:
+          name: my-artifact
+          path: /artifact
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@master
+        with:
+          name: my-artifact
+          path: /artifact
+
       - run: npm run test:e2e
