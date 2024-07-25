@@ -5,7 +5,7 @@ import { ShowsModule } from '../src/shows/shows.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import 'dotenv/config';
 
-describe('Feedback (e2e)', () => {
+describe('ShowsController (e2e)', () => {
   let app: INestApplication;
 
   beforeEach(async () => {
